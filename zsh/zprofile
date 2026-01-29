@@ -1,0 +1,21 @@
+# Login shell environment (PATH, toolchains)
+
+# Homebrew (Apple Silicon)
+if [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -x /usr/local/bin/brew ]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+# Your bins
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
+
+export PATH="$HOME/.spectral/:$PATH";
+
+. "$HOME/.local/bin/env"
+
+export PATH="$HOME/go/bin:$PATH"
+
+# Local, private environment (NOT in git)
+[[ -r "$HOME/.zprofile.private" ]] && source "$HOME/.zprofile.private"

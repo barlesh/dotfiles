@@ -1,0 +1,9 @@
+# Dotfiles zprofile loader
+DOTFILES="$HOME/dotfiles"
+ZPROFILE="$DOTFILES/zsh/zprofile"
+
+if [ -r "$ZPROFILE" ]; then
+  . "$ZPROFILE"
+else
+  echo "WARN: missing $ZPROFILE"
+fi

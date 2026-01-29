@@ -1,0 +1,9 @@
+# Dotfiles zshrc loader
+DOTFILES="$HOME/dotfiles"
+ZSHRC="$DOTFILES/zsh/zshrc"
+
+if [ -r "$ZSHRC" ]; then
+  . "$ZSHRC"
+else
+  echo "WARN: missing $ZSHRC"
+fi
