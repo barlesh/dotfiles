@@ -1,0 +1,29 @@
+# ---------- Core shell / UX ----------
+brew "direnv"
+brew "fzf"
+brew "fzf-tab"
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+brew "watch"
+brew "telnet"
+
+# ---------- Secrets / env ----------
+brew "bitwarden-cli"
+brew "teller"
+
+# ---------- Kubernetes / Cloud ----------
+brew "helm"
+brew "k9s"
+brew "kind"
+brew "minikube"
+
+# ---------- Infra / DevOps ----------
+brew "terraform"
+
+# ---------- Data / Parsing ----------
+brew "yq"
+brew "libpq"
+brew "jq"
+
+# ---------- Spectral ----------
+brew "spectralops/tap/keyscope"
