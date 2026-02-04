@@ -1,0 +1,25 @@
+# Private configuration files (never commit these)
+*.private
+*private*
+.env
+.env.*
+secrets/
+*.key
+*.pem
+id_rsa*
+*.secret
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Temporary files
+*.swp
+*.swo
+*~
+*.tmp
+
+# Backup files
+*_backup_*
+backup_*
