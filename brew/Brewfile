@@ -27,3 +27,24 @@ brew "jq"
 
 # ---------- Spectral ----------
 brew "spectralops/tap/keyscope"
+
+
+
+# ---------- Terminal / UI ----------
+cask "iterm2"
+
+# ---------- Containers / Infra ----------
+cask "docker"
+
+# ---------- Editors ----------
+cask "cursor"
+
+# ---------- Browsers (dev-friendly) ----------
+cask "google-chrome"
+# cask "firefox"        # optional
+
+# ---------- Kubernetes UI ----------
+# (k9s is CLI; no GUI needed here)
+
+# ---------- Utilities ----------
+
