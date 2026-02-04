@@ -12,7 +12,7 @@ My personal dotfiles configuration for macOS.
 
 ```bash
 # Clone this repository
-git clone https://github.com/YOUR_USERNAME/dotfiles.git ~/dotfiles
+git clone https://github.com/barlesh/dotfiles.git ~/dotfiles
 
 # Run the bootstrap script
 ~/dotfiles/bin/bootstrap.sh
