@@ -117,6 +117,10 @@ FZFTAB="$(brew --prefix fzf-tab)/share/fzf-tab/fzf-tab.zsh"
 
 
 
+# Claude aliases
+alias c="claude"
+alias ct="claude-tasks"
+
 # Git aliases
 alias gsync="gco master && gl && gco - && git merge master"
 
@@ -149,7 +153,12 @@ npx() {
 }
 
 
-# eztasks
+# Task management Claude session (Linear MCP + distinct iTerm2 profile)
+claude-tasks() {
+  cd ~/agentic-ws/task-management || return
+  printf '\e]1337;CurrentDir=%s\a' "$PWD"
+  claude
+}
 
 # Local, private overrides (NOT in git)
 [[ -r "$HOME/.zshrc.private" ]] && source "$HOME/.zshrc.private"
