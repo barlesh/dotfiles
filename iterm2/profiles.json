@@ -1146,6 +1146,7 @@
             "class": "iTermStatusBarJobComponent",
             "configuration": {
               "knobs": {
+                "maxwidth": Infinity,
                 "base: compression resistance": 1,
                 "shared text color": {
                   "Red Component": 0.8600050806999207,
@@ -1155,8 +1156,7 @@
                   "Green Component": 0.6414304971694946
                 },
                 "minwidth": 0,
-                "base: priority": 5.0,
-                "maxwidth": Infinity
+                "base: priority": 5.0
               },
               "layout advanced configuration dictionary value": {
                 "remove empty components": false,
