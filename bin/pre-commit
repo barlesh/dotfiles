@@ -9,9 +9,11 @@ if [[ -x "${SAVE_SCRIPT}" ]]; then
   "${SAVE_SCRIPT}"
 
   # Stage any config files that changed
-  git -C "${DOTFILES_DIR}" add -N claude/ 2>/dev/null || true
-  if ! git -C "${DOTFILES_DIR}" diff --quiet -- claude/; then
-    git -C "${DOTFILES_DIR}" add claude/
-    echo "==> Pre-commit: staged updated Claude configs"
-  fi
+  for dir in claude iterm2 zsh; do
+    git -C "${DOTFILES_DIR}" add -N "${dir}/" 2>/dev/null || true
+    if ! git -C "${DOTFILES_DIR}" diff --quiet -- "${dir}/"; then
+      git -C "${DOTFILES_DIR}" add "${dir}/"
+      echo "==> Pre-commit: staged updated ${dir} configs"
+    fi
+  done
 fi

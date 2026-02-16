@@ -51,7 +51,23 @@ else
   echo "    (We'll add this next: dotfiles/brew/Brewfile)"
 fi
 
-# 5) Install home loaders (copy, not symlink: safest)
+# 5) Install Powerlevel10k theme for Oh My Zsh
+P10K_DIR="${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/themes/powerlevel10k"
+if [[ ! -d "${P10K_DIR}" ]]; then
+  echo "==> Installing Powerlevel10k..."
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${P10K_DIR}"
+else
+  echo "==> Powerlevel10k already installed."
+fi
+
+# Copy p10k config if present in dotfiles
+P10K_SRC="${DOTFILES_DIR}/zsh/p10k.zsh"
+if [[ -r "${P10K_SRC}" ]]; then
+  cp -f "${P10K_SRC}" "${HOME}/.p10k.zsh"
+  echo "==> Installed ~/.p10k.zsh"
+fi
+
+# 6) Install home loaders (copy, not symlink: safest)
 for pair in zshrc:.zshrc zprofile:.zprofile; do
   src="${DOTFILES_DIR}/home/${pair%%:*}"
   dst="${HOME}/${pair##*:}"
@@ -65,7 +81,7 @@ for pair in zshrc:.zshrc zprofile:.zprofile; do
   echo "==> Installed ${dst} from ${src}"
 done
 
-# 6) Claude Code configuration
+# 7) Claude Code configuration
 echo "==> Setting up Claude Code configs..."
 
 mkdir -p "${HOME}/.claude"
@@ -84,7 +100,16 @@ if [[ -r "${CCSTATUSLINE_SETTINGS}" ]]; then
   echo "==> Installed ~/.config/ccstatusline/settings.json"
 fi
 
-# 7) Install pre-commit hook for auto-syncing configs
+# 8) iTerm2 Dynamic Profiles
+ITERM_SRC="${DOTFILES_DIR}/iterm2/profiles.json"
+ITERM_DST="${HOME}/Library/Application Support/iTerm2/DynamicProfiles/dotfiles.json"
+if [[ -r "${ITERM_SRC}" ]]; then
+  mkdir -p "$(dirname "${ITERM_DST}")"
+  cp -f "${ITERM_SRC}" "${ITERM_DST}"
+  echo "==> Installed iTerm2 Dynamic Profiles"
+fi
+
+# 9) Install pre-commit hook for auto-syncing configs
 HOOK_SRC="${DOTFILES_DIR}/bin/pre-commit"
 HOOK_DST="${DOTFILES_DIR}/.git/hooks/pre-commit"
 if [[ -r "${HOOK_SRC}" ]]; then

@@ -32,6 +32,7 @@ brew "spectralops/tap/keyscope"
 
 # ---------- Terminal / UI ----------
 cask "iterm2"
+cask "font-jetbrains-mono-nerd-font"
 
 # ---------- Containers / Infra ----------
 cask "docker"

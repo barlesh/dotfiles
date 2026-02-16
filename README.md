@@ -7,6 +7,7 @@ My personal dotfiles configuration for macOS.
 - **zsh** configuration (`.zshrc`, `.zprofile`, `.zshenv`)
 - **Homebrew** package list (`Brewfile`)
 - **Claude Code** settings and status line (ccstatusline)
+- **iTerm2** profiles via Dynamic Profiles (font, colors, themes)
 - **Bootstrap script** for automated setup
 
 ## Quick Start
@@ -32,6 +33,8 @@ dotfiles/
 ├── claude/
 │   ├── settings.json       # Claude Code settings (plugins, status line)
 │   └── ccstatusline.json   # ccstatusline theme and widget config
+├── iterm2/
+│   └── profiles.json       # iTerm2 profiles (font, colors, themes)
 ├── home/                   # Files copied to $HOME
 │   ├── zshrc
 │   └── zprofile
@@ -43,7 +46,7 @@ dotfiles/
 
 ## Saving config changes
 
-When you change Claude Code or ccstatusline settings, sync them back to the repo:
+When you change Claude Code, ccstatusline, or iTerm2 settings, sync them back to the repo:
 
 ```bash
 ~/dotfiles/bin/dotfiles-save.sh
