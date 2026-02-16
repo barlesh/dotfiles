@@ -65,7 +65,36 @@ for pair in zshrc:.zshrc zprofile:.zprofile; do
   echo "==> Installed ${dst} from ${src}"
 done
 
+# 6) Claude Code configuration
+echo "==> Setting up Claude Code configs..."
+
+mkdir -p "${HOME}/.claude"
+mkdir -p "${HOME}/.config/ccstatusline"
+
+CLAUDE_SETTINGS="${DOTFILES_DIR}/claude/settings.json"
+CCSTATUSLINE_SETTINGS="${DOTFILES_DIR}/claude/ccstatusline.json"
+
+if [[ -r "${CLAUDE_SETTINGS}" ]]; then
+  cp -f "${CLAUDE_SETTINGS}" "${HOME}/.claude/settings.json"
+  echo "==> Installed ~/.claude/settings.json"
+fi
+
+if [[ -r "${CCSTATUSLINE_SETTINGS}" ]]; then
+  cp -f "${CCSTATUSLINE_SETTINGS}" "${HOME}/.config/ccstatusline/settings.json"
+  echo "==> Installed ~/.config/ccstatusline/settings.json"
+fi
+
+# 7) Install pre-commit hook for auto-syncing configs
+HOOK_SRC="${DOTFILES_DIR}/bin/pre-commit"
+HOOK_DST="${DOTFILES_DIR}/.git/hooks/pre-commit"
+if [[ -r "${HOOK_SRC}" ]]; then
+  cp -f "${HOOK_SRC}" "${HOOK_DST}"
+  chmod +x "${HOOK_DST}"
+  echo "==> Installed pre-commit hook"
+fi
+
 echo "==> Done."
 echo "Next: open a NEW terminal window and verify:"
 echo "  - autosuggestions, fzf-tab"
 echo "  - 'command -v brew'"
+echo "  - 'command -v claude'"

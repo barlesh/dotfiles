@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Pre-commit hook: sync live configs into the repo before committing.
+# Installed to .git/hooks/pre-commit by bootstrap.sh.
+
+DOTFILES_DIR="${HOME}/dotfiles"
+SAVE_SCRIPT="${DOTFILES_DIR}/bin/dotfiles-save.sh"
+
+if [[ -x "${SAVE_SCRIPT}" ]]; then
+  "${SAVE_SCRIPT}"
+
+  # Stage any config files that changed
+  git -C "${DOTFILES_DIR}" add -N claude/ 2>/dev/null || true
+  if ! git -C "${DOTFILES_DIR}" diff --quiet -- claude/; then
+    git -C "${DOTFILES_DIR}" add claude/
+    echo "==> Pre-commit: staged updated Claude configs"
+  fi
+fi

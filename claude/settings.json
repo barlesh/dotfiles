@@ -1,0 +1,10 @@
+{
+  "enabledPlugins": {
+    "babysitter@a5c.ai": true
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "npx -y ccstatusline@latest",
+    "padding": 0
+  }
+}
