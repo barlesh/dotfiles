@@ -66,6 +66,27 @@ with open('${tmp}', 'w') as f:
   else
     rm -f "${tmp}"
   fi
+
+  # iTerm2 global key bindings
+  GKEYMAP_DST="${DOTFILES_DIR}/iterm2/global-keymap.json"
+  tmp2="$(mktemp)"
+  python3 -c "
+import plistlib, json, sys
+
+with open('${ITERM_PLIST}', 'rb') as f:
+    data = plistlib.load(f)
+gkm = data.get('GlobalKeyMap', {})
+if gkm:
+    with open('${tmp2}', 'w') as f:
+        json.dump(gkm, f, indent=2)
+" 2>/dev/null
+  if [[ -s "${tmp2}" ]] && ! cmp -s "${tmp2}" "${GKEYMAP_DST}" 2>/dev/null; then
+    mv "${tmp2}" "${GKEYMAP_DST}"
+    echo "  synced: iterm2/global-keymap.json"
+    changed=1
+  else
+    rm -f "${tmp2}"
+  fi
 fi
 
 if [[ "${changed}" -eq 0 ]]; then

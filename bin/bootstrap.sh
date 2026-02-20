@@ -109,6 +109,32 @@ if [[ -r "${ITERM_SRC}" ]]; then
   echo "==> Installed iTerm2 Dynamic Profiles"
 fi
 
+# 8b) iTerm2 global key bindings (merge into existing, never replace)
+GKEYMAP_SRC="${DOTFILES_DIR}/iterm2/global-keymap.json"
+ITERM_PLIST="${HOME}/Library/Preferences/com.googlecode.iterm2.plist"
+if [[ -r "${GKEYMAP_SRC}" ]] && [[ -f "${ITERM_PLIST}" ]]; then
+  python3 -c "
+import plistlib, json
+
+with open('${GKEYMAP_SRC}') as f:
+    saved = json.load(f)
+
+with open('${ITERM_PLIST}', 'rb') as f:
+    plist = plistlib.load(f)
+
+existing = plist.get('GlobalKeyMap', {})
+merged = {**existing, **saved}
+
+if merged != existing:
+    plist['GlobalKeyMap'] = merged
+    with open('${ITERM_PLIST}', 'wb') as f:
+        plistlib.dump(plist, f)
+    print('==> Merged iTerm2 global key bindings (' + str(len(saved)) + ' entries)')
+else:
+    print('==> iTerm2 global key bindings already up to date')
+" 2>/dev/null
+fi
+
 # 9) Install pre-commit hook for auto-syncing configs
 HOOK_SRC="${DOTFILES_DIR}/bin/pre-commit"
 HOOK_DST="${DOTFILES_DIR}/.git/hooks/pre-commit"

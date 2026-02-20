@@ -1,10 +1,12 @@
 {
-  "enabledPlugins": {
-    "babysitter@a5c.ai": true
-  },
   "statusLine": {
     "type": "command",
     "command": "npx -y ccstatusline@latest",
     "padding": 0
-  }
+  },
+  "enabledPlugins": {
+    "babysitter@a5c.ai": true,
+    "rust-analyzer-lsp@claude-plugins-official": true
+  },
+  "skipDangerousModePermissionPrompt": true
 }
