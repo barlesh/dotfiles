@@ -120,6 +120,7 @@ FZFTAB="$(brew --prefix fzf-tab)/share/fzf-tab/fzf-tab.zsh"
 # Claude aliases
 alias c="claude"
 alias ct="claude-tasks"
+alias cy="claude --dangerously-skip-permissions"
 
 # Git aliases
 alias gsync="gco master && gl && gco - && git merge master"

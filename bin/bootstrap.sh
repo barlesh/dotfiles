@@ -81,7 +81,19 @@ for pair in zshrc:.zshrc zprofile:.zprofile; do
   echo "==> Installed ${dst} from ${src}"
 done
 
-# 7) Claude Code configuration
+# 7) Code directory structure (~/code)
+echo "==> Creating ~/code directory structure..."
+CODE_ROOT="${HOME}/code"
+for dir in \
+  github gitlab work projects \
+  experiments experiments/rust experiments/terraform \
+  learning learning/rust learning/terraform \
+  sandbox; do
+  mkdir -p "${CODE_ROOT}/${dir}"
+done
+echo "==> Created ${CODE_ROOT} (github, gitlab, work, projects, experiments, learning, sandbox + lang/tech templates)"
+
+# 8) Claude Code configuration
 echo "==> Setting up Claude Code configs..."
 
 mkdir -p "${HOME}/.claude"
@@ -100,7 +112,7 @@ if [[ -r "${CCSTATUSLINE_SETTINGS}" ]]; then
   echo "==> Installed ~/.config/ccstatusline/settings.json"
 fi
 
-# 8) iTerm2 Dynamic Profiles
+# 9) iTerm2 Dynamic Profiles
 ITERM_SRC="${DOTFILES_DIR}/iterm2/profiles.json"
 ITERM_DST="${HOME}/Library/Application Support/iTerm2/DynamicProfiles/dotfiles.json"
 if [[ -r "${ITERM_SRC}" ]]; then
@@ -109,7 +121,7 @@ if [[ -r "${ITERM_SRC}" ]]; then
   echo "==> Installed iTerm2 Dynamic Profiles"
 fi
 
-# 8b) iTerm2 global key bindings (merge into existing, never replace)
+# 9b) iTerm2 global key bindings (merge into existing, never replace)
 GKEYMAP_SRC="${DOTFILES_DIR}/iterm2/global-keymap.json"
 ITERM_PLIST="${HOME}/Library/Preferences/com.googlecode.iterm2.plist"
 if [[ -r "${GKEYMAP_SRC}" ]] && [[ -f "${ITERM_PLIST}" ]]; then
@@ -135,7 +147,7 @@ else:
 " 2>/dev/null
 fi
 
-# 9) Install pre-commit hook for auto-syncing configs
+# 10) Install pre-commit hook for auto-syncing configs
 HOOK_SRC="${DOTFILES_DIR}/bin/pre-commit"
 HOOK_DST="${DOTFILES_DIR}/.git/hooks/pre-commit"
 if [[ -r "${HOOK_SRC}" ]]; then
